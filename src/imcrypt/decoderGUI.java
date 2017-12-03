@@ -39,7 +39,7 @@ public class decoderGUI implements ActionListener{
 
 		showImage = new JButton("Show Image");
 		showImage.addActionListener(this);
-		//imagePath = new JTextField(20);
+		imagePath = new JTextField(20);
 		buttonPanel.add(browseImage);
 		buttonPanel.add(showImage);
 
