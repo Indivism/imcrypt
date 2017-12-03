@@ -1,6 +1,6 @@
 package imcrypt;
 
-import java.awt.*; 
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
@@ -10,11 +10,9 @@ import java.io.* ;
 /**
  * imcrypt decoder GUI.
  */	
-public class decoderGUI implements ActionListener{
+public class DecoderGUI implements ActionListener{
 
-	public static void main(String args[]) {
-		new decoderGUI();
-	}
+	
 
 	JFrame decoderUI;
 	JFileChooser imageChooser;
@@ -24,7 +22,7 @@ public class decoderGUI implements ActionListener{
 	BufferedImage image;
 	JLabel imageDisplay;
 
-	public decoderGUI() {
+	public DecoderGUI() {
 		JFrame decoderUI = new JFrame ("imcrypt Decoder");
 		imageDisplay = new JLabel();
 		buttonPanel = new JPanel();
@@ -54,7 +52,11 @@ public class decoderGUI implements ActionListener{
 			String path = imageChooser.getSelectedFile().getAbsolutePath();
 			//imagePath.setText(path);               
 			imageDisplay.setIcon(new ImageIcon(new ImageIcon(path).getImage()));
-		} 
+		}
+	}
+	
+	public static void main(String args[]) {
+		new DecoderGUI();
 	}
 }
 

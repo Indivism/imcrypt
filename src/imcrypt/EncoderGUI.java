@@ -9,7 +9,7 @@ import java.io.*;
 /**
  * imcrypt encoder GUI.
  */
-public class encoderGUI implements ActionListener{
+public class EncoderGUI implements ActionListener{
 	JFrame encoderUI;
     JFileChooser imageChooser;
     JButton browseImage, encryptImage;
@@ -18,7 +18,7 @@ public class encoderGUI implements ActionListener{
     BufferedImage image;
     JLabel imageDisplay;
 	
-	public encoderGUI() {
+	public EncoderGUI() {
 		JFrame encoderUI = new JFrame ("imcrypt Encoder");
 		imageDisplay = new JLabel();
 		buttonPanel = new JPanel();
@@ -48,13 +48,14 @@ public class encoderGUI implements ActionListener{
 			String path = imageChooser.getSelectedFile().getAbsolutePath();
 			//imagePath.setText(path);
             imageDisplay.setIcon(new ImageIcon(new ImageIcon(path).getImage()));
+		} else if(e.getSource() == encryptImage) {
+			
 		}
 	}
 	
 	public static void main(String args[]) {
-		new encoderGUI();
+		new EncoderGUI();
 	}
 
 }
-
 	
