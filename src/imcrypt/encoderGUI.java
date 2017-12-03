@@ -1,4 +1,5 @@
 package imcrypt;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -11,7 +12,7 @@ import java.io.*;
 public class encoderGUI implements ActionListener{
 	JFrame encoderUI;
     JFileChooser imageChooser;
-    JButton browseImage, showImage;
+    JButton browseImage, encryptImage;
     JTextField imagePath;
     JPanel buttonPanel;
     BufferedImage image;
@@ -21,17 +22,18 @@ public class encoderGUI implements ActionListener{
 		JFrame encoderUI = new JFrame ("imcrypt Encoder");
 		imageDisplay = new JLabel();
 		buttonPanel = new JPanel();
+		
 		encoderUI.setBounds(500, 250, 750, 500);
 		encoderUI.setPreferredSize(new Dimension(750, 500));
-		encoderUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		encoderUI.setLayout(new FlowLayout());
+		
 		browseImage = new JButton("Browse");
 		browseImage.addActionListener(this);
-		showImage = new JButton("Encrypt");
-		showImage.addActionListener(this);
+		encryptImage = new JButton("Encrypt");
+		encryptImage.addActionListener(this);
 		imagePath = new JTextField(20);
 		buttonPanel.add(browseImage);
-		buttonPanel.add(showImage);
+		buttonPanel.add(encryptImage);
 		buttonPanel.add(imagePath);
 		encoderUI.add(buttonPanel);
 		encoderUI.add(imageDisplay);
