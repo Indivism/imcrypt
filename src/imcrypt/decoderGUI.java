@@ -56,7 +56,7 @@ public class decoderGUI implements ActionListener{
 			imageChooser = new JFileChooser();
 			imageChooser.showOpenDialog(decoderUI);
 			String path = imageChooser.getSelectedFile().getAbsolutePath();
-			imagePath.setText(path);               
+			//imagePath.setText(path);               
 			label.setIcon(new ImageIcon(new ImageIcon(path).getImage()));
 		} 
 	}
