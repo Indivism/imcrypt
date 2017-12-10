@@ -17,6 +17,7 @@ public class EncoderGUI implements ActionListener{
     JPanel buttonPanel;
     BufferedImage image;
     JLabel imageDisplay;
+    String path;
 	
 	public EncoderGUI() {
 		JFrame encoderUI = new JFrame ("imcrypt Encoder");
@@ -45,11 +46,18 @@ public class EncoderGUI implements ActionListener{
 		if(e.getSource() == browseImage) {
 			imageChooser = new JFileChooser();
 			imageChooser.showOpenDialog(encoderUI);
-			String path = imageChooser.getSelectedFile().getAbsolutePath();
-			//imagePath.setText(path);
-            imageDisplay.setIcon(new ImageIcon(new ImageIcon(path).getImage()));
-		} else if(e.getSource() == encryptImage) {
-			
+			try {
+				path = imageChooser.getSelectedFile().getAbsolutePath();
+				image = ImageIO.read(new File(path));
+				imageDisplay.setIcon(new ImageIcon(new ImageIcon(image).getImage()));
+			}
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Image could not be read.","Error",JOptionPane.ERROR_MESSAGE);
+
+			}
+			System.out.println(path);
+		} if(e.getSource() == encryptImage) {
+			System.out.println(path);
 		}
 	}
 	
