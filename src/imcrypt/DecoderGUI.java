@@ -16,7 +16,7 @@ public class DecoderGUI implements ActionListener {
 	JFileChooser imageChooser;
 	JButton browseImage, decryptText, decryptImage;
 	JTextField decodedMessage;
-	JPanel buttonPanel;
+	JPanel buttonPanel, imagePanel;
 	BufferedImage image;
 	JLabel imageDisplay, decodedImageDisplay;
 	String path;
@@ -24,8 +24,9 @@ public class DecoderGUI implements ActionListener {
 	public DecoderGUI() {
 		JFrame decoderUI = new JFrame ("imcrypt Decoder");
 		imageDisplay = new JLabel();
-		decodedImageDisplay = new JLabel();
 		buttonPanel = new JPanel();
+		imagePanel = new JPanel();
+		JScrollPane viewer = new JScrollPane(imagePanel);
 		
 		decoderUI.setBounds(500, 150, 750, 500);
 		decoderUI.setPreferredSize(new Dimension(900, 750));
@@ -35,17 +36,18 @@ public class DecoderGUI implements ActionListener {
 		browseImage.addActionListener(this);
 		decryptText = new JButton("Retrieve Text");
 		decryptText.addActionListener(this);
-		decryptImage = new JButton("Retreive Image");
+		decryptImage = new JButton("Retrieve Image");
 		decryptImage.addActionListener(this);
 		decodedMessage = new JTextField(20);
 		buttonPanel.add(browseImage);
 		buttonPanel.add(decryptText);
 		buttonPanel.add(decryptImage);
-
 		buttonPanel.add(decodedMessage);
+		
+		viewer.setPreferredSize(new Dimension(900, 750));
 		decoderUI.add(buttonPanel);
 		decoderUI.add(imageDisplay);
-		decoderUI.add(decodedImageDisplay);
+		decoderUI.add(viewer);
 		decoderUI.pack();
 		decoderUI.setVisible(true);
 	}
@@ -66,7 +68,7 @@ public class DecoderGUI implements ActionListener {
 		} if(e.getSource() == decryptText) {
 			decodedMessage.setText(ImcryptText.decode(image));
 		} if(e.getSource() == decryptImage) {
-			decodedImageDisplay.setIcon(new ImageIcon(ImcryptImage.reveal(image)));
+			imageDisplay.setIcon(new ImageIcon(ImcryptImage.reveal(image)));
 		}
 	}
 	
