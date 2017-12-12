@@ -10,37 +10,42 @@ import java.io.* ;
 /**
  * imcrypt decoder GUI.
  */	
-public class DecoderGUI implements ActionListener{
-
+public class DecoderGUI implements ActionListener {
 	
-
 	JFrame decoderUI;
 	JFileChooser imageChooser;
-	JButton browseImage, decryptImage;
-	JTextField imagePath;
+	JButton browseImage, decryptText, decryptImage;
+	JTextField decodedMessage;
 	JPanel buttonPanel;
 	BufferedImage image;
-	JLabel imageDisplay;
+	JLabel imageDisplay, decodedImageDisplay;
+	String path;
 
 	public DecoderGUI() {
 		JFrame decoderUI = new JFrame ("imcrypt Decoder");
 		imageDisplay = new JLabel();
+		decodedImageDisplay = new JLabel();
 		buttonPanel = new JPanel();
 		
-		decoderUI.setBounds(500, 250, 750, 500);
-		decoderUI.setPreferredSize(new Dimension(750, 500));
+		decoderUI.setBounds(500, 150, 750, 500);
+		decoderUI.setPreferredSize(new Dimension(900, 750));
 		decoderUI.setLayout(new FlowLayout());
 		
 		browseImage = new JButton("Browse");
 		browseImage.addActionListener(this);
-		decryptImage = new JButton("Decrypt");
+		decryptText = new JButton("Retrieve Text");
+		decryptText.addActionListener(this);
+		decryptImage = new JButton("Retreive Image");
 		decryptImage.addActionListener(this);
-		imagePath = new JTextField(20);
+		decodedMessage = new JTextField(20);
 		buttonPanel.add(browseImage);
+		buttonPanel.add(decryptText);
 		buttonPanel.add(decryptImage);
-		buttonPanel.add(imagePath);
+
+		buttonPanel.add(decodedMessage);
 		decoderUI.add(buttonPanel);
 		decoderUI.add(imageDisplay);
+		decoderUI.add(decodedImageDisplay);
 		decoderUI.pack();
 		decoderUI.setVisible(true);
 	}
@@ -49,9 +54,19 @@ public class DecoderGUI implements ActionListener{
 		if(e.getSource() == browseImage) {
 			imageChooser = new JFileChooser();
 			imageChooser.showOpenDialog(decoderUI);
-			String path = imageChooser.getSelectedFile().getAbsolutePath();
-			//imagePath.setText(path);               
-			imageDisplay.setIcon(new ImageIcon(new ImageIcon(path).getImage()));
+			try {
+				path = imageChooser.getSelectedFile().getAbsolutePath();
+				image = ImageIO.read(new File(path));
+				imageDisplay.setIcon(new ImageIcon(new ImageIcon(image).getImage()));
+			}
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Image could not be read.","Error",JOptionPane.ERROR_MESSAGE);
+
+			}
+		} if(e.getSource() == decryptText) {
+			decodedMessage.setText(ImcryptText.decode(image));
+		} if(e.getSource() == decryptImage) {
+			decodedImageDisplay.setIcon(new ImageIcon(ImcryptImage.reveal(image)));
 		}
 	}
 	
